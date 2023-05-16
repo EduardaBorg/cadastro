@@ -5,7 +5,6 @@ import java.util.*
 
 data class Employee(val name: String, val position: String, val salary: Double)
 
-@Suppress("SameParameterValue")
 class EmployeeManagementTool {
     private val scanner = Scanner(System.`in`)
     private val employees = mutableListOf<Employee>()
@@ -42,6 +41,7 @@ class EmployeeManagementTool {
         scanner.nextLine()  // Consume newline left-over
         return result
     }
+
     private fun readDouble(): Double {
         while (true) {
             try {
@@ -63,11 +63,7 @@ class EmployeeManagementTool {
         val position = readInput("Cargo: ")
         val salary = readDoubleInput("Salário: ")
 
-        val nameParts = fullName.split(" ")
-        val firstName = nameParts.firstOrNull() ?: ""
-        val lastName = nameParts.drop(1).joinToString(" ")
-
-        val employee = Employee("$firstName $lastName", position, salary)
+        val employee = Employee(fullName, position, salary)
         employees.add(employee)
 
         println("Funcionário cadastrado com sucesso!")
@@ -94,7 +90,11 @@ class EmployeeManagementTool {
 
         val name = readInput("Digite o nome do funcionário a ser excluído: ")
 
-        val foundEmployees = employees.filter { it.name.equals(name, ignoreCase = true) }
+        val foundEmployees = employees.filter {
+            it.name.split(" ")[0].equals(name, ignoreCase = true) ||
+                    it.name.equals(name, ignoreCase = true)
+        }
+
         if (foundEmployees.isNotEmpty()) {
             println("Foram encontrados ${foundEmployees.size} funcionário(s) com o nome \"$name\":")
             foundEmployees.forEachIndexed { index, employee ->
@@ -147,8 +147,7 @@ class EmployeeManagementTool {
 
     private fun waitForEnter() {
         println("Pressione Enter para continuar...")
-        scanner.nextLine() // Limpa a quebra de linha pendente
-        scanner.nextLine() // Aguarda a próxima linha em branco
+        readString() // Aguarda a próxima linha em branco
     }
 
     private fun readInput(prompt: String): String {
@@ -171,3 +170,4 @@ fun main() {
     val employeeManagementTool = EmployeeManagementTool()
     employeeManagementTool.run()
 }
+

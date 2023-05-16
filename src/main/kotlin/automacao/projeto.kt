@@ -17,8 +17,7 @@ class EmployeeManagementTool {
 
     fun run() {
         while (true) {
-            val choice = showMenuAndGetChoice()
-            when (choice) {
+            when (showMenuAndGetChoice()) {
                 1 -> registerEmployee()
                 2 -> listEmployees()
                 3 -> deleteEmployee()
@@ -50,16 +49,18 @@ class EmployeeManagementTool {
 
     private fun registerEmployee() {
         println("Cadastro de funcionário")
-        print("Nome: ")
-        val name = readString()
-
+        print("Nome completo: ")
+        val fullName = readString()
         print("Cargo: ")
         val position = readString()
-
         print("Salário: ")
         val salary = readDouble()
 
-        val employee = Employee(name, position, salary)
+        val nameParts = fullName.split(" ")
+        val firstName = nameParts.firstOrNull() ?: ""
+        val lastName = nameParts.drop(1).joinToString(" ")
+
+        val employee = Employee("$firstName $lastName", position, salary)
         employees.add(employee)
 
         println("Funcionário cadastrado com sucesso!")
@@ -84,12 +85,12 @@ class EmployeeManagementTool {
             return
         }
 
-        print("Digite o nome do funcionário a ser excluído: ")
-        val name = readString()
+        print("Digite o nome completo do funcionário a ser excluído: ")
+        val fullName = readString()
 
-        val foundEmployees = employees.filter { it.name.equals(name, ignoreCase = true) }
+        val foundEmployees = employees.filter { it.name.equals(fullName, ignoreCase = true) }
         if (foundEmployees.isNotEmpty()) {
-            println("Foram encontrados ${foundEmployees.size} funcionário(s) com o nome \"$name\":")
+            println("Foram encontrados ${foundEmployees.size} funcionário(s) com o nome \"$fullName\":")
             foundEmployees.forEachIndexed { index, employee ->
                 println("${index + 1}. Nome: ${employee.name}, Cargo: ${employee.position}, Salário: ${employee.salary}")
             }
@@ -154,7 +155,6 @@ class EmployeeManagementTool {
         scanner.nextLine() // Limpa a quebra de linha pendente
         scanner.nextLine() // Aguarda a próxima linha em branco
     }
-
 }
 
 fun main() {

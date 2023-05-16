@@ -5,10 +5,10 @@ import java.util.*
 
 data class Employee(val name: String, val position: String, val salary: Double)
 
+@Suppress("SameParameterValue")
 class EmployeeManagementTool {
     private val scanner = Scanner(System.`in`)
     private val employees = mutableListOf<Employee>()
-
     private val FILE_PATH = "employees.txt"
 
     init {
@@ -16,45 +16,52 @@ class EmployeeManagementTool {
     }
 
     fun run() {
-        while (true) {
-            when (showMenuAndGetChoice()) {
-                1 -> registerEmployee()
-                2 -> listEmployees()
-                3 -> deleteEmployee()
-                4 -> break
-                else -> println("Opção inválida. Tente novamente.")
-            }
-        }
-
-        saveEmployeesToFile()
+        while (true) when (showMenuAndGetChoice()) {
+            1 -> registerEmployee()
+            2 -> listEmployees()
+            3 -> deleteEmployee()
+            4 -> return
+            else -> println("Opção inválida. Tente novamente.")
+        }.also { saveEmployeesToFile() }
     }
 
     private fun showMenuAndGetChoice(): Int {
-        println("Bem-vindo ao Employee Management Tool")
-        println("1 - Cadastrar funcionário")
-        println("2 - Listar funcionários cadastrados")
-        println("3 - Excluir funcionário")
-        println("4 - Sair")
-        print("Escolha uma opção: ")
+        println("""
+            Bem-vindo ao Employee Management Tool
+            1 - Cadastrar funcionário
+            2 - Listar funcionários cadastrados
+            3 - Excluir funcionário
+            4 - Sair
+            Escolha uma opção: 
+        """.trimIndent())
         return readInt()
     }
 
     private fun readInt(): Int {
-        return scanner.nextInt()
+        val result = scanner.nextInt()
+        scanner.nextLine()  // Consume newline left-over
+        return result
+    }
+    private fun readDouble(): Double {
+        while (true) {
+            try {
+                val result = scanner.nextDouble()
+                scanner.nextLine()  // Consume newline left-over
+                return result
+            } catch (e: InputMismatchException) {
+                println("Valor inválido. Digite um número válido.")
+                scanner.nextLine()
+            }
+        }
     }
 
-    private fun readString(): String {
-        return scanner.next().trim()
-    }
+    private fun readString(): String = scanner.nextLine().trim()
 
     private fun registerEmployee() {
         println("Cadastro de funcionário")
-        print("Nome completo: ")
-        val fullName = readString()
-        print("Cargo: ")
-        val position = readString()
-        print("Salário: ")
-        val salary = readDouble()
+        val fullName = readInput("Nome completo: ")
+        val position = readInput("Cargo: ")
+        val salary = readDoubleInput("Salário: ")
 
         val nameParts = fullName.split(" ")
         val firstName = nameParts.firstOrNull() ?: ""
@@ -85,18 +92,16 @@ class EmployeeManagementTool {
             return
         }
 
-        print("Digite o nome completo do funcionário a ser excluído: ")
-        val fullName = readString()
+        val name = readInput("Digite o nome do funcionário a ser excluído: ")
 
-        val foundEmployees = employees.filter { it.name.equals(fullName, ignoreCase = true) }
+        val foundEmployees = employees.filter { it.name.equals(name, ignoreCase = true) }
         if (foundEmployees.isNotEmpty()) {
-            println("Foram encontrados ${foundEmployees.size} funcionário(s) com o nome \"$fullName\":")
+            println("Foram encontrados ${foundEmployees.size} funcionário(s) com o nome \"$name\":")
             foundEmployees.forEachIndexed { index, employee ->
                 println("${index + 1}. Nome: ${employee.name}, Cargo: ${employee.position}, Salário: ${employee.salary}")
             }
 
-            print("Digite o número do funcionário que deseja excluir (ou 0 para cancelar): ")
-            val deleteChoice = readInt()
+            val deleteChoice = readIntInput("Digite o número do funcionário que deseja excluir (ou 0 para cancelar): ")
             if (deleteChoice in 1..foundEmployees.size) {
                 val employeeToDelete = foundEmployees[deleteChoice - 1]
                 employees.remove(employeeToDelete)
@@ -108,16 +113,6 @@ class EmployeeManagementTool {
             println("Funcionário não encontrado.")
         }
         waitForEnter()
-    }
-
-    private fun readDouble(): Double {
-        return try {
-            scanner.nextDouble()
-        } catch (e: InputMismatchException) {
-            println("Valor inválido. Digite um número válido.")
-            scanner.nextLine() // Limpa o buffer do scanner
-            readDouble()
-        }
     }
 
     private fun loadEmployeesFromFile() {
@@ -154,6 +149,21 @@ class EmployeeManagementTool {
         println("Pressione Enter para continuar...")
         scanner.nextLine() // Limpa a quebra de linha pendente
         scanner.nextLine() // Aguarda a próxima linha em branco
+    }
+
+    private fun readInput(prompt: String): String {
+        print(prompt)
+        return readString()
+    }
+
+    private fun readIntInput(prompt: String): Int {
+        print(prompt)
+        return readInt()
+    }
+
+    private fun readDoubleInput(prompt: String): Double {
+        print(prompt)
+        return readDouble()
     }
 }
 

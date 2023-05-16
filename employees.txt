@@ -1,0 +1,4 @@
+eduarda borges,estagiaria,2200.0
+leonardo grigorio,CEO,200000.0
+maria clara borges,junior,3000.0
+maria clara borges ferreira,senior,5000.0

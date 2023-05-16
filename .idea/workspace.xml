@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24661aab-dfb7-43fb-8192-ac2db89a9753" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cadastro.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/automacao/dados.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/automacao/projeto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employees.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/automacao/dados.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/automacao/projeto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/automacao/projeto.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +29,23 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Pqh7OIbeoxvj3ZsGaTYwEh8psN" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Eduarda/Tarefa-Amor/nnt-aulas"
+    "last_opened_file_path": "C:/Users/Eduarda/Tarefa-Amor/cadastro"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Kotlin.ProjetoKt">
     <configuration name="EmployeeRegistrationTool" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="automacao.EmployeeRegistrationTool" />
       <module name="cadastro" />
@@ -58,8 +53,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProjetoKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="automacao.ProjetoKt" />
+      <module name="cadastro" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.ProjetoKt" />
         <item itemvalue="Kotlin.EmployeeRegistrationTool" />
       </list>
     </recent_temporary>
@@ -74,5 +77,8 @@
       <updated>1684190356869</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
